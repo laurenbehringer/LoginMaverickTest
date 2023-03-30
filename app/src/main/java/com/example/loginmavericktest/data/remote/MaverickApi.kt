@@ -12,7 +12,7 @@ interface MaverickApi {
     suspend fun login(@Body data: LoginMaverickRequest): Response<LoginMaverickModel>
 
     companion object{
-        const val BASE_URL = "https://8067-103-144-180-17.ap.ngrok.io/"
+        const val BASE_URL = "https://07ff-103-119-62-49.ap.ngrok.io/"
     }
 
 }

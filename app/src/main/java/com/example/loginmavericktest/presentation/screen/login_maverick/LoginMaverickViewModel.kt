@@ -1,6 +1,5 @@
-package com.loginmavericktest.notificationengine.presentation.screens.login_redbank
+package com.example.loginmavericktest.presentation.screen.login_maverick
 
-import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmavericktest.domain.repository.MaverickRepository
@@ -10,7 +9,6 @@ import com.example.loginmavericktest.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,7 +58,7 @@ class LoginMaverickViewModel @Inject constructor(
         val request = LoginMaverickRequest(
             username = "mod1",
             password = "12345678",
-            token = "dIWJpTKUSWW2AcMlLrQBTy:APA91bEG1V7d8cswq0j-Q6oapj9GWUoMnO-EgwDfcuNFXdvtEsv1SHL4XViiusVZYC6kXZRLNpcB3g3hNqBZbTnBCGgwlQJAXuW7nISfOKmbWPWhkv7vO9HkVdp5Vpu4uX83bBTJOt15"
+            token = "c2FapoHx6o5n8Uqzk01i9f:APA91bF9m0R3ldPv0EDp_oZ5-5DEh1rcdrhcUgWmj7GLQx_LmnFTDM4uw0WaWF2rE-kRhPZOwllWFT5w5EoYrPDHif8kUnN_TuqUD5tJ31awFr7BkdL-C2tE3O6B4lyLCIgsdWfOBePE"
         )
         viewModelScope.launch {
             loginMaverickUseCase.invoke(request).collect { data ->

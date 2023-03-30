@@ -1,4 +1,4 @@
-package com.loginmavericktest.notificationengine.presentation.shared
+package com.example.loginmavericktest.presentation.shared
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

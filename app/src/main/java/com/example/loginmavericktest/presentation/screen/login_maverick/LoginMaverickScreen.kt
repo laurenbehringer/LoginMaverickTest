@@ -1,4 +1,4 @@
-package com.loginmavericktest.notificationengine.presentation.screens.login_redbank
+package com.example.loginmavericktest.presentation.screen.login_maverick
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmavericktest.R
-import com.loginmavericktest.notificationengine.presentation.shared.LoadingDialog
-import com.loginmavericktest.notificationengine.presentation.shared.ResponseDialog
+import com.example.loginmavericktest.presentation.shared.LoadingDialog
+import com.example.loginmavericktest.presentation.shared.ResponseDialog
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")

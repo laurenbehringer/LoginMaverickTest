@@ -1,4 +1,4 @@
-package com.loginmavericktest.notificationengine.presentation.screens.login_redbank
+package com.example.loginmavericktest.presentation.screen.login_maverick
 
 import com.example.loginmavericktest.domain.model.LoginMaverickModel
 
