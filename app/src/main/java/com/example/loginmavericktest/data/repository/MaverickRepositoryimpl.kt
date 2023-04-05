@@ -11,7 +11,7 @@ class MaverickRepositoryimpl @Inject constructor(
     private val maverickApi: MaverickApi,
 ) : MaverickRepository {
 
-    override suspend fun loginRedbank(data: LoginMaverickRequest): ResponseModel<LoginMaverickModel> {
+    override suspend fun loginMaverick(data: LoginMaverickRequest): ResponseModel<LoginMaverickModel> {
         val result = ResponseModel<LoginMaverickModel>()
         println("Body : $data")
         val response = maverickApi.login(data)

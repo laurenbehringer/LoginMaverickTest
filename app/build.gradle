@@ -4,6 +4,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 kotlin {
@@ -70,6 +71,7 @@ dependencies {
     implementation "androidx.compose.material:material:$compose_ui_version"
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -110,7 +112,14 @@ dependencies {
     implementation "io.coil-kt:coil-compose:2.2.2"
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+
+    //firebase
+//    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
+
 }
+
 
 kapt {
     correctErrorTypes true

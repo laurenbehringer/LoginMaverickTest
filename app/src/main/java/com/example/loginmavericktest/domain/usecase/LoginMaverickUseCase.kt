@@ -15,7 +15,7 @@ class LoginMaverickUseCase @Inject constructor(
 ) {
     operator fun invoke(data: LoginMaverickRequest): Flow<Resource<LoginMaverickModel>> = flow {
         emit(Resource.Loading(true))
-        val response = repository.loginRedbank(data)
+        val response = repository.loginMaverick(data)
         if (response.data != null){
             if (response.data != null){
                 emit(Resource.Success(data = response.data))

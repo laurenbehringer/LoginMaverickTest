@@ -1,5 +1,9 @@
 package com.example.loginmavericktest.presentation.screen.login_maverick
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginmavericktest.domain.repository.MaverickRepository
@@ -7,6 +11,8 @@ import com.example.loginmavericktest.domain.request.LoginMaverickRequest
 import com.example.loginmavericktest.domain.usecase.LoginMaverickUseCase
 import com.example.loginmavericktest.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,18 +23,28 @@ import javax.inject.Inject
 class LoginMaverickViewModel @Inject constructor(
     private val repository: MaverickRepository,
     private val loginMaverickUseCase: LoginMaverickUseCase,
-): ViewModel() {
+    @ApplicationContext private val context: Context,
+    ): ViewModel() {
     private val _state = MutableStateFlow(LoginMaverickState())
     val state = _state.asStateFlow()
+    val shared: SharedPreferences = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+
+
+    init {
+        val shared: SharedPreferences = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+        Log.d("wk", shared.getString("token", "") ?: "")
+    }
 
     fun onEvent(event: LoginMaverickEvent) {
         when(event){
             is LoginMaverickEvent.Login -> {
+                val lol: String = shared.getString("token", "") ?: ""
+                Log.d("TOKEN WLMFAO", lol)
                 _state.update {
                     it.copy(isError = false, message = "")
                 }
 //                login()
-                loginMaverick()
+                loginMaverick(lol)
             }
             is LoginMaverickEvent.InputUsername -> {
                 _state.update {
@@ -54,11 +70,11 @@ class LoginMaverickViewModel @Inject constructor(
         }
     }
 
-    private fun loginMaverick() {
+    private fun loginMaverick(token : String) {
         val request = LoginMaverickRequest(
             username = "mod1",
             password = "12345678",
-            token = "c2FapoHx6o5n8Uqzk01i9f:APA91bF9m0R3ldPv0EDp_oZ5-5DEh1rcdrhcUgWmj7GLQx_LmnFTDM4uw0WaWF2rE-kRhPZOwllWFT5w5EoYrPDHif8kUnN_TuqUD5tJ31awFr7BkdL-C2tE3O6B4lyLCIgsdWfOBePE"
+            token = token,
         )
         viewModelScope.launch {
             loginMaverickUseCase.invoke(request).collect { data ->

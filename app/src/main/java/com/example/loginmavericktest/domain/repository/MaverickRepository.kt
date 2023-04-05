@@ -7,7 +7,7 @@ import com.example.loginmavericktest.domain.request.LoginMaverickRequest
 interface MaverickRepository {
 
 
-    suspend fun loginRedbank(
+    suspend fun loginMaverick(
         data: LoginMaverickRequest
     ): ResponseModel<LoginMaverickModel>
 

@@ -1,6 +1,11 @@
 package com.example.loginmavericktest.presentation.screen.login_maverick
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -10,6 +15,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,9 +31,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.loginmavericktest.R
 import com.example.loginmavericktest.presentation.shared.LoadingDialog
 import com.example.loginmavericktest.presentation.shared.ResponseDialog
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginMaverickScreen(
     viewModel: LoginMaverickViewModel = hiltViewModel()
@@ -53,8 +62,10 @@ fun LoginMaverickScreen(
         }
         if (state.model != null){
 //            showSnackBar(state.model!!.OKContent?.fullName)
-            showSnackBar(state.model!!.username)
+//            showSnackBar(state.model!!.status)
+            print("XDLOL!?")
         }
+
     }
 
     Scaffold(
@@ -69,7 +80,11 @@ fun LoginMaverickScreen(
             }
             .padding(horizontal = 20.dp)
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+        ) {
             if (state.isLoading) {
                 println("LOADING ${state.isLoading}")
                 LoadingDialog()
@@ -81,7 +96,7 @@ fun LoginMaverickScreen(
             }
             Spacer(modifier = Modifier.height(50.dp))
             Text(
-                text = "Login Redbank",
+                text = "Login Maverick",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
@@ -101,10 +116,16 @@ fun LoginMaverickScreen(
                 label = {
                     Text(text = "Username")
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.Blue
+                )
             )
             Spacer(modifier = Modifier.height(20.dp))
             OutlinedTextField(
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.Blue
+                ),
                 value = state.password,
                 onValueChange = {
                     viewModel.onEvent(LoginMaverickEvent.InputPassword(it))
